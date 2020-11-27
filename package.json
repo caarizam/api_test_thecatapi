@@ -1,0 +1,33 @@
+{
+  "name": "api_test_thecatapi",
+  "version": "1.0.0",
+  "description": "Api Testing for The Cat Api",
+  "main": "config.js",
+  "scripts": {
+    "test:build": "tsc",
+    "verify": "cucumber-js features/",
+    "test": "cucumber-js features/ --require-module ts-node/register --require features/step_definitions/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caarizam/api_test_thecatapi.git"
+  },
+  "author": "Carlos Ariza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caarizam/api_test_thecatapi/issues"
+  },
+  "homepage": "https://github.com/caarizam/api_test_thecatapi#readme",
+  "devDependencies": {
+    "@cucumber/cucumber": "^7.0.0-rc.0",
+    "@types/chai": "^4.2.14",
+    "@types/chai-as-promised": "^7.1.3",
+    "@types/node": "^14.14.6",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "cucumber-html-reporter": "^5.2.0",
+    "supertest": "^6.0.0",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.5"
+  }
+}
