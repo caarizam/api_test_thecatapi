@@ -6,7 +6,7 @@
   "scripts": {
     "test:build": "tsc",
     "verify": "cucumber-js features/",
-    "test": "cucumber-js features/ --require-module ts-node/register --require features/step_definitions/**/*.ts"
+    "test": "cucumber-js features/ --require-module ts-node/register --require features/step_definitions/**/*.ts -f message:reports/json/cucumber_report.ndjson "
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "cucumber-html-reporter": "^5.2.0",
+    "mkdirp": "^1.0.4",
     "supertest": "^6.0.0",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.5"

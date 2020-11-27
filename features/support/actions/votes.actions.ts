@@ -28,8 +28,11 @@ export class VotesActions{
                 lastResponse = {status_code: response.statusCode, body: response.body};
                 setLastResponse(lastResponse);
                 currentVoteCreated = { image_id: payload.image_id, id: response.body.id };
+                console.log("\n********************************************************");
                 console.log("ImageId: " + payload.image_id);
                 console.log("IdCreated: " + response.body.id);
+                console.log(response.body);
+                console.log("\n********************************************************");
                 setCurrentVoteCreated(currentVoteCreated);
                 expect(200).to.be.equal(response.statusCode);
                 expect("SUCCESS").to.be.equal(response.body.message);
@@ -50,14 +53,16 @@ export class VotesActions{
         expect(imageId).to.be.equal(currentVoteCreated.image_id);
 
         await request(baseModel.baseUrl)
-            .get(votesModel.votesEndPoint)
+            .get(votesModel.votesEndPoint + "/" + currentVoteCreated.id)
             .timeout(60 * 1000)
             .set('Accept', 'application/json')
             .set('x-api-key', getApiKey())
-            .query( {'vote_id': currentVoteCreated.id} )
             .then(response => {
+                console.log("\n********************************************************");
                 console.log("Requested: " + currentVoteCreated.id);
-                console.log("Got: " + response.body[0].id);
+                console.log("Got: " + response.body.id);
+                console.log(response.body);
+                console.log("\n********************************************************");
                 lastResponse = {status_code: response.statusCode, body: response.body};
                 setLastResponse(lastResponse);
                 expect(200).to.be.equal(response.statusCode);
@@ -72,11 +77,16 @@ export class VotesActions{
     async validateGetVoteResponse(vote: number){
         let lastResponse: LastResponseInterface = getLastResponse();
         let currentVoteCreated: CurrentVoteCreatedInterface = getCurrentVoteCreated();
-
+        console.log("\n********************************************************");
+        console.log("Expected ID: " + currentVoteCreated.id);
+        console.log("Expected ImageID: " + currentVoteCreated.image_id);
+        console.log("Current ID: " + lastResponse.body.id);
+        console.log("Current ImageID: " + lastResponse.body.image_id);
+        console.log("\n********************************************************");
         expect(200).to.be.equal(lastResponse.status_code);
-        expect(currentVoteCreated.id).to.be.equal(lastResponse.body[0].id);
-        expect(currentVoteCreated.image_id).to.be.equal(lastResponse.body[0].image_id);
-        expect(vote).to.be.equal(lastResponse.body[0].value);
+        expect(currentVoteCreated.id).to.be.equal(lastResponse.body.id);
+        expect(currentVoteCreated.image_id).to.be.equal(lastResponse.body.image_id);
+        expect(vote).to.be.equal(lastResponse.body.value);
 
     }
 
@@ -90,12 +100,14 @@ export class VotesActions{
         let currentVoteCreated: CurrentVoteCreatedInterface = getCurrentVoteCreated();
 
         await request(baseModel.baseUrl)
-            .delete(votesModel.votesEndPoint)
+            .delete(votesModel.votesEndPoint + "/" + currentVoteCreated.id)
             .timeout(60 * 1000)
             .set('Accept', 'application/json')
             .set('x-api-key', getApiKey())
-            .query( {'vote_id': currentVoteCreated.id} )
             .then(response => {
+                console.log("\n********************************************************");
+                console.log("DELETE: " + response.body.message);
+                console.log("\n********************************************************");
                 expect(200).to.be.equal(response.statusCode);
                 expect("SUCCESS").to.be.equal(response.body.message);
             });

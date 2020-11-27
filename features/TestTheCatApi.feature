@@ -22,8 +22,8 @@ Feature: The Cat Api testing
     And The client should be able to delete the vote
 
     Examples: Data for votes
-      | imageId | subId         | value |
-      | asf10   | my-user-asf10 | 1     |
-      | asf2    | my-user-asf2  | 0     |
-      | asf3    | my-user-asf3  | 1     |
-      | asf4    | my-user-asf4  | 0     |
+      | imageId   | subId       | value |
+      | vasf00110 | my-user-101 | 1     |
+      | vasf00202 | my-user-102 | 0     |
+      | vasf00101 | my-user-103 | 1     |
+      | vasf00101 | my-user-104 | 0     |
